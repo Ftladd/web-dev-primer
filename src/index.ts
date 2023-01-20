@@ -1,5 +1,21 @@
+/*
+ *  index.ts
+ *  Project: First Exercise
+ *
+ *  Author: Finlay Ladd
+ *  Created on: Jan 19, 2023
+ */
 import express, { Request, Response } from 'express';
 import ip from 'ip';
+
+function handleRoot(req: Request, res: Response): void {
+  res.send('hi from Finn');
+}
+const app = express();
+app.get('/', handleRoot);
+app.listen(9080, () => {
+  console.log(`App is listening on http://${ip.address()}:${9080}`);
+});
 
 // Exercise 1
 function merge(arr1: Array<number>, arr2: Array<number>): Array<number> {
@@ -63,19 +79,6 @@ const nTaylor: Candidate = {
   votes: [37, 21, 38, 39, 29],
   funding: 6317921937,
 };
-
-const app = express();
-
-function handleRoot(req: Request, res: Response): void {
-  res.send('hi from Finn');
-}
-
-app.get('/', handleRoot);
-
-app.listen(9080, () => {
-  console.log(`App is listening on http://${ip.address()}:${9080}`);
-});
-
 // Exercise 1
 const array1: Array<number> = [4, 5, 23, 18, 9, -5, 31];
 const array2: Array<number> = [18, 74, 88, 3];
@@ -160,3 +163,4 @@ if (winner === 0) {
     `There is no Winner! There will be a runoff between ${firstPlace} and ${secondPlace}!`
   );
 }
+console.log();
