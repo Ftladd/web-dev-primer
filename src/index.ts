@@ -5,16 +5,19 @@
  *  Author: Finlay Ladd
  *  Created on: Jan 19, 2023
  */
-import express, { Request, Response } from 'express';
+import express, { Express, Request, Response } from 'express';
 import ip from 'ip';
 
-function handleRoot(req: Request, res: Response): void {
-  res.send('hi from Finn');
+function getRoot(req: Request, res: Response): void {
+  res.send('Hello, from Finlay!');
 }
-const app = express();
-app.get('/', handleRoot);
-app.listen(9080, () => {
-  console.log(`App is listening on http://${ip.address()}:${9080}`);
+
+const app: Express = express();
+const PORT = 9080;
+
+app.get('/', getRoot);
+app.listen(PORT, () => {
+  console.log(`App is listening on port http://${ip.address()}:${9080}`);
 });
 
 // Exercise 1
