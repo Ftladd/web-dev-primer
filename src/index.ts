@@ -54,6 +54,20 @@ function getVotes(candidate: Candidate): number {
   }
   return indVotes;
 }
+function sumVotes(candidates: Array<Candidate>): number {
+  let totalVotes = 0;
+  for (let i = 0; i < 4; i += 1) {
+    totalVotes += getVotes(candidates[i]);
+  }
+  return totalVotes;
+}
+function getPrecinct(precinctNum: number, candidates: Array<Candidate>): number {
+  let precinctVotes = 0;
+  for (let i = 0; i < 4; i += 1) {
+    precinctVotes += candidates[i].votes[precinctNum - 1];
+  }
+  return precinctVotes;
+}
 type Candidate = {
   name: string;
   votes: Array<number>;
@@ -95,49 +109,36 @@ for (const word of attempts) {
 console.log();
 
 // Exercise 3
-const underwoodVotes = getVotes(eUnderwood);
-const olsonVotes = getVotes(rOlson);
-const willisVotes = getVotes(lWillis);
-const taylorVotes = getVotes(nTaylor);
-const voteList = [underwoodVotes, olsonVotes, willisVotes, taylorVotes];
 const candidates = [eUnderwood, rOlson, lWillis, nTaylor];
-const totalVotes = underwoodVotes + olsonVotes + willisVotes + taylorVotes;
 for (let i = 0; i < 4; i += 1) {
   console.log(
-    `${candidates[i].name} -- ${voteList[i]} votes -- ${((voteList[i] / totalVotes) * 100).toFixed(
-      2
-    )}%`
+    `${candidates[i].name} -- ${getVotes(candidates[i])} votes -- ${(
+      (getVotes(candidates[i]) / sumVotes(candidates)) *
+      100
+    ).toFixed(2)}%`
   );
 }
 console.log();
 for (let i = 0; i < 4; i += 1) {
-  const precinct1: number =
-    eUnderwood.votes[0] + rOlson.votes[0] + nTaylor.votes[0] + lWillis.votes[0];
-  const precinct2: number =
-    eUnderwood.votes[1] + rOlson.votes[1] + nTaylor.votes[1] + lWillis.votes[1];
-  const precinct3: number =
-    eUnderwood.votes[2] + rOlson.votes[2] + nTaylor.votes[2] + lWillis.votes[2];
-  const precinct4: number =
-    eUnderwood.votes[3] + rOlson.votes[3] + nTaylor.votes[3] + lWillis.votes[3];
-  const precinct5: number =
-    eUnderwood.votes[4] + rOlson.votes[4] + nTaylor.votes[4] + lWillis.votes[4];
   console.log(`${candidates[i].name}:
-    Precinct 1 -- ${((candidates[i].votes[0] / precinct1) * 100).toFixed(2)}%
-    Precinct 2 -- ${((candidates[i].votes[1] / precinct2) * 100).toFixed(2)}%
-    Precinct 3 -- ${((candidates[i].votes[2] / precinct3) * 100).toFixed(2)}%
-    Precinct 4 -- ${((candidates[i].votes[3] / precinct4) * 100).toFixed(2)}%
-    Precinct 5 -- ${((candidates[i].votes[4] / precinct5) * 100).toFixed(2)}%`);
+    Precinct 1 -- ${((candidates[i].votes[0] / getPrecinct(1, candidates)) * 100).toFixed(2)}%
+    Precinct 2 -- ${((candidates[i].votes[1] / getPrecinct(2, candidates)) * 100).toFixed(2)}%
+    Precinct 3 -- ${((candidates[i].votes[2] / getPrecinct(3, candidates)) * 100).toFixed(2)}%
+    Precinct 4 -- ${((candidates[i].votes[3] / getPrecinct(4, candidates)) * 100).toFixed(2)}%
+    Precinct 5 -- ${((candidates[i].votes[4] / getPrecinct(5, candidates)) * 100).toFixed(2)}%`);
   console.log();
 }
 for (let i = 0; i < 4; i += 1) {
   console.log(
-    `${candidates[i].name} spent $${(candidates[i].funding / voteList[i]).toFixed(2)} per vote`
+    `${candidates[i].name} spent $${(candidates[i].funding / getVotes(candidates[i])).toFixed(
+      2
+    )} per vote`
   );
 }
 console.log();
 let winner = 0;
 for (let i = 0; i < 4; i += 1) {
-  if (voteList[i] / totalVotes > 0.5) {
+  if (getVotes(candidates[i]) / sumVotes(candidates) > 0.5) {
     console.log(`${candidates[i].name} is the Winner!`);
     winner = 1;
   }
@@ -147,15 +148,15 @@ if (winner === 0) {
   let firstPlace = '';
   let secondPlace = '';
   for (let i = 0; i < 4; i += 1) {
-    if (voteList[i] > mostVotes) {
-      mostVotes = voteList[i];
+    if (getVotes(candidates[i]) > mostVotes) {
+      mostVotes = getVotes(candidates[i]);
       firstPlace = candidates[i].name;
     }
   }
   mostVotes = 0;
   for (let i = 0; i < 4; i += 1) {
-    if (voteList[i] > mostVotes && candidates[i].name !== firstPlace) {
-      mostVotes = voteList[i];
+    if (getVotes(candidates[i]) > mostVotes && candidates[i].name !== firstPlace) {
+      mostVotes = getVotes(candidates[i]);
       secondPlace = candidates[i].name;
     }
   }
