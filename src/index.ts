@@ -5,6 +5,7 @@
  *  Author: Finlay Ladd
  *  Created on: Jan 19, 2023
  */
+
 import express, { Express, Request, Response } from 'express';
 import ip from 'ip';
 
@@ -17,7 +18,7 @@ const PORT = 9080;
 
 app.get('/', getRoot);
 app.listen(PORT, () => {
-  console.log(`App is listening on port http://${ip.address()}:${9080}`);
+  console.log(`App is listening on port http://${ip.address()}:${PORT}`);
 });
 
 // Exercise 1
@@ -33,6 +34,7 @@ function merge(arr1: Array<number>, arr2: Array<number>): Array<number> {
   }
   return mergedArr;
 }
+
 // Exercise 2
 function checkWord(attempt: string, secret: string): string {
   const answer: Array<string> = [];
@@ -49,6 +51,7 @@ function checkWord(attempt: string, secret: string): string {
   }
   return `${answer[0]}${answer[1]}${answer[2]}${answer[3]}${answer[4]}`;
 }
+
 // Exercise 3
 function getVotes(candidate: Candidate): number {
   let indVotes = 0;
@@ -96,6 +99,7 @@ const nTaylor: Candidate = {
   votes: [37, 21, 38, 39, 29],
   funding: 6317921937,
 };
+
 // Exercise 1
 const array1: Array<number> = [4, 5, 23, 18, 9, -5, 31];
 const array2: Array<number> = [18, 74, 88, 3];
