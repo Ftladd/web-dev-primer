@@ -1,3 +1,4 @@
+type StudentManager = Record<string, Student>;
 type CourseGrades = {
   assignmentWeights: Array<CourseGrade>;
   finalExamWeight: number;

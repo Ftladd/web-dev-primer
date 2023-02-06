@@ -1,14 +1,13 @@
 import express, { Express } from 'express';
 import ip from 'ip';
-import { createNewStudent, getStudentName, notImplemented } from './controllers/StudentController';
+import { createNewStudent, getStudentData, notImplemented } from './controllers/StudentController';
 
 const app: Express = express();
+const PORT = 9080;
 app.use(express.json());
 
-const PORT = 9080;
-
 app.post('/api/students', createNewStudent);
-app.get('/api/students/:studentName', getStudentName);
+app.get('/api/students/:studentName', getStudentData);
 app.get('/api/students/:studentName/finalExam', notImplemented);
 app.post('/api/students/:studentName/finalExam', notImplemented);
 app.post('/api/students/:studentName/grades/:assignmentName', notImplemented);

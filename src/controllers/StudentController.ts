@@ -4,10 +4,14 @@ function notImplemented(req: Request, res: Response): void {
   res.sendStatus(501); // 501 not Implemented
 }
 function createNewStudent(req: Request, res: Response): void {
-  res.sendStatus(501); // 501 not Implemented
+  console.log('\nPOST /api/students');
+  console.log(req.body);
+
+  // echo
+  res.json(req.body);
 }
-function getStudentName(req: Request, res: Response): void {
-  res.sendStatus(501); // 501 not Implemented
+function getStudentData(req: Request, res: Response): void {
+  res.sendStatus(501);
 }
 
-export { createNewStudent, getStudentName, notImplemented };
+export { createNewStudent, getStudentData, notImplemented };
