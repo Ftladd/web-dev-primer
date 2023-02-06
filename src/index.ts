@@ -1,26 +1,16 @@
-/*
- *  index.ts
- *  Project: First Exercise
- *
- *  Author: Finlay Ladd
- *  Created on: Jan 19, 2023
- */
-
 import express, { Express, Request, Response } from 'express';
 import ip from 'ip';
 
-function getRoot(req: Request, res: Response): void {
-  res.send('Hello, from Finlay!');
-}
-
 const app: Express = express();
+app.use(express.json());
+
 const PORT = 9080;
 
-app.get('/', getRoot);
 app.listen(PORT, () => {
   console.log(`App is listening on port http://${ip.address()}:${PORT}`);
 });
 
+/**
 // Exercise 1
 function merge(arr1: Array<number>, arr2: Array<number>): Array<number> {
   const mergedArr: Array<number> = [];
@@ -172,3 +162,4 @@ if (winner === 0) {
   );
 }
 console.log();
+*/
