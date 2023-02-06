@@ -22,3 +22,11 @@ function addStudent(newStudentData: NewStudentRequest): boolean {
   students[name] = newStudent;
   return true;
 }
+function getStudent(studentName: string): Student | undefined {
+  if (!(studentName in students)) {
+    return undefined;
+  }
+  return students[studentName];
+}
+
+export { students, addStudent, getStudent };
