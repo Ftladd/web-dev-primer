@@ -33,3 +33,7 @@ type FinalExamScores = {
 type StudentNameParams = {
   studentName: string;
 };
+type GradeUpdateParams = {
+  studentName: string;
+  assignmentName: string;
+};
